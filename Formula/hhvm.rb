@@ -4,49 +4,49 @@ class Hhvm < Formula
   homepage 'http://hhvm.com/'
 
   head do
-    url 'https://github.com/facebook/hhvm.git'
+    url 'https://github.com/hhvm-osx/hhvm.git'
     resource 'third-party' do
-      url 'https://github.com/hhvm/hhvm-third-party.git'
+      url 'https://github.com/hhvm-osx/hhvm-third-party.git'
     end
     #resource 'folly' do
-    #  url 'https://github.com/facebook/folly.git'
+    #  url 'https://github.com/hhvm-osx/folly.git'
     #end
     #resource 'thrift' do
-    #  url 'https://github.com/facebook/fbthrift.git'
+    #  url 'https://github.com/hhvm-osx/fbthrift.git'
     #end
   end
 
-  stable do
-    url 'https://github.com/facebook/hhvm/archive/HHVM-3.3.0.tar.gz'
-    sha1 'ba911fbc9d06e418ec18e68f3736d69f79075ee5'
-    version '3.3.0'
-    resource 'third-party' do
-      url 'https://github.com/hhvm/hhvm-third-party/archive/fdef620998ce599280904416263968b59ef21794.tar.gz'
-      sha1 '10066e1faca7f3ceba8a5ad9c2d18b0670dc4fc8'
-    end
-    resource 'folly' do
-      url 'https://github.com/facebook/folly/archive/6e46d468cf2876dd59c7a4dddcb4e37abf070b7a.tar.gz'
-      sha1 'ca1d03214085a02783d06c5ab6886e5a13e451f0'
-    end
-  end
+  #stable do
+  #  url 'https://github.com/facebook/hhvm/archive/HHVM-3.3.0.tar.gz'
+  #  sha1 'ba911fbc9d06e418ec18e68f3736d69f79075ee5'
+  #  version '3.3.0'
+  #  resource 'third-party' do
+  #    url 'https://github.com/hhvm/hhvm-third-party/archive/fdef620998ce599280904416263968b59ef21794.tar.gz'
+  #    sha1 '10066e1faca7f3ceba8a5ad9c2d18b0670dc4fc8'
+  #  end
+  #  resource 'folly' do
+  #    url 'https://github.com/facebook/folly/archive/6e46d468cf2876dd59c7a4dddcb4e37abf070b7a.tar.gz'
+  #    sha1 'ca1d03214085a02783d06c5ab6886e5a13e451f0'
+  #  end
+  #end
 
-  devel do
-    url 'https://github.com/facebook/hhvm/archive/3543a709f64b6ae1848e63628ec058c4af113254.tar.gz'
-    sha1 '4c21ad80c229555adb72b176c2cdaf4ed818cad1'
-    version '3.3.1a'
-    resource 'third-party' do
-      url 'https://github.com/hhvm/hhvm-third-party/archive/12acbba4c05d8cbe97fe2a94a4a833c0c80e8182.tar.gz'
-      sha1 '04ac53659b8ba1ee3d5e0681a71d779a276f6f06'
-    end
-    resource 'folly' do
-      url 'https://github.com/facebook/folly/archive/4ecd8cdd6396f2f4cbfc17c1063537884e3cd6b9.tar.gz'
-      sha1 'd8b0dc49ff7854da83a900276718e3b31176c468'
-    end
-    resource 'thrift' do
-      url 'https://github.com/facebook/fbthrift/archive/378e954ac82a00ba056e6fccd5e1fa3e76803cc8.tar.gz'
-      sha1 '1a26eb22b0e36fe1823343c32ec79544cf1556d4'
-    end
-  end
+  #devel do
+  #  url 'https://github.com/facebook/hhvm/archive/3543a709f64b6ae1848e63628ec058c4af113254.tar.gz'
+  #  sha1 '4c21ad80c229555adb72b176c2cdaf4ed818cad1'
+  #  version '3.3.1a'
+  #  resource 'third-party' do
+  #    url 'https://github.com/hhvm/hhvm-third-party/archive/12acbba4c05d8cbe97fe2a94a4a833c0c80e8182.tar.gz'
+  #    sha1 '04ac53659b8ba1ee3d5e0681a71d779a276f6f06'
+  #  end
+  #  resource 'folly' do
+  #    url 'https://github.com/facebook/folly/archive/4ecd8cdd6396f2f4cbfc17c1063537884e3cd6b9.tar.gz'
+  #    sha1 'd8b0dc49ff7854da83a900276718e3b31176c468'
+  #  end
+  #  resource 'thrift' do
+  #    url 'https://github.com/facebook/fbthrift/archive/378e954ac82a00ba056e6fccd5e1fa3e76803cc8.tar.gz'
+  #    sha1 '1a26eb22b0e36fe1823343c32ec79544cf1556d4'
+  #  end
+  #end
 
   option 'with-cotire', 'Speed up the build by precompiling headers.'
   option 'with-debug', 'Enable debug build (default Release).'
@@ -83,7 +83,9 @@ class Hhvm < Formula
   depends_on 'libmemcached'
   depends_on 'libpng'
   depends_on 'libssh2'
+  depends_on 'libvpx'
   depends_on 'libxslt'
+  depends_on 'libzip'
   depends_on 'mcrypt'
   depends_on 'objective-caml'
   depends_on 'oniguruma'
@@ -139,6 +141,11 @@ class Hhvm < Formula
       "-DLIBPNG_INCLUDE_DIRS=#{Formula['libpng'].opt_prefix}/include",
       "-DLIBSQLITE3_INCLUDE_DIR=#{Formula['sqlite'].opt_prefix}/include",
       "-DLIBSQLITE3_LIBRARY=#{Formula['sqlite'].opt_prefix}/lib/libsqlite3.0.dylib",
+      "-DLIBVPX_INCLUDE_DIRS=#{Formula['libvpx'].opt_prefix}/include",
+      "-DLIBVPX_LIBRARIES=#{Formula['libvpx'].opt_prefix}/lib",
+      "-DLIBZIP_INCLUDE_DIR_ZIP=#{Formula['libzip'].opt_prefix}/include",
+      "-DLIBZIP_INCLUDE_DIR_ZIPCONF=#{Formula['libzip'].opt_prefix}/lib/libzip/include/zipconf.h",
+      "-DLIBZIP_LIBRARY=#{Formula['libzip'].opt_prefix}/lib",
       "-DMcrypt_INCLUDE_DIR=#{Formula['mcrypt'].opt_prefix}/include",
       "-DOCAMLC_EXECUTABLE=#{Formula['objective-caml'].opt_prefix}/bin/ocamlc",
       "-DOCAMLC_OPT_EXECUTABLE=#{Formula['objective-caml'].opt_prefix}/bin/ocamlc.opt",
