@@ -6,7 +6,7 @@ class Hhvm < Formula
   head do
     url 'https://github.com/facebook/hhvm.git'
     resource 'third-party' do
-      url 'https://github.com/hhvm-osx/hhvm-third-party.git'
+      url 'https://github.com/hhvm/hhvm-third-party.git'
     end
     #resource 'folly' do
     #  url 'https://github.com/facebook/folly.git'
@@ -107,6 +107,7 @@ class Hhvm < Formula
   def install
     args = [
       ".",
+      "-CMAKE_REQUIRED_FLAGS=\"-march=native",
       "-DBOOST_INCLUDEDIR=#{Formula['boost'].opt_prefix}/include",
       "-DBOOST_LIBRARYDIR=#{Formula['boost'].opt_prefix}/lib",
       "-DCCLIENT_INCLUDE_PATH=#{Formula['imap-uw'].opt_prefix}/include/imap",
