@@ -6,7 +6,7 @@ class Hhvm < Formula
   head do
     url 'https://github.com/facebook/hhvm.git'
     resource 'third-party' do
-      url 'https://github.com/hhvm/hhvm-third-party.git'
+      url 'https://github.com/hhvm-osx/hhvm-third-party.git'
     end
     #resource 'folly' do
     #  url 'https://github.com/facebook/folly.git'
